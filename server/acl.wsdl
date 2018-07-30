@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions name="Library"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="Library"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="Library"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <xsd:documentation></xsd:documentation>
+
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="Library">
+            <xsd:complexType name="user">
+                <xsd:sequence>
+                    <xsd:element name="username" type="xsd:string"></xsd:element>
+                    <xsd:element name="password" type="xsd:string"></xsd:element>
+                    <xsd:element name="email" type="xsd:string"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="userRequest">
+        <wsdl:part name="user" type="xsd:user"></wsdl:part>
+    </wsdl:message>
+
+    <wsdl:message name="userResponse">
+        <wsdl:part name="status_code" type="tns:integer"></wsdl:part>
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserRequest">
+        <wsdl:part name="username" type="xsd:string"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getUserResponse">
+        <wsdl:part name="user" type="tns:string"></wsdl:part>
+    </wsdl:message>
+
+
+    <wsdl:portType name="adminUsers">
+        <wsdl:operation name="addUser">
+            <wsdl:input message="tns:userRequest"/>
+            <wsdl:output message="tns:userResponse"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="activateUser">
+            <wsdl:input message="tns:getUserRequest"/>
+            <wsdl:output message="tns:userResponse"/>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="desactivateUser">
+            <wsdl:input message="tns:getUserRequest"/>
+            <wsdl:output message="tns:userResponse"/>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUser">
+            <wsdl:input message="tns:getUserRequest"/>
+            <wsdl:output message="tns:getUserResponse"/>
+        </wsdl:operation>
+
+    </wsdl:portType>
+
+
+
+
+
+
+
+    <wsdl:binding name="adminUsers" type="tns:adminUsers">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+        <wsdl:operation name="addUser">
+            <soap:operation soapAction="http://localhost/server/server.php?wsdl"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="adminUsers"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="adminUsers"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="activateUser">
+            <soap:operation soapAction="http://localhost/server/server.php?wsdl"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="adminUsers"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="adminUsers"/>
+            </wsdl:output>
+        </wsdl:operation>
+    
+        <wsdl:operation name="desactivateUser">
+            <soap:operation soapAction="http://localhost/server/server.php?wsdl"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="adminUsers"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="adminUsers"/>
+            </wsdl:output>
+        </wsdl:operation>
+    
+
+
+        <wsdl:operation name="getUser">
+            <soap:operation soapAction="http://localhost/server/server.php?wsdl"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="adminUsers"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="adminUsers"/>
+            </wsdl:output>
+        </wsdl:operation>
+    
+    </wsdl:binding>
+
+    <wsdl:service name="adminUsers">
+        <wsdl:port binding="tns:adminUsers" name="usersAdm">
+            <soap:address location="http://localhost/server/server.php?wsdl"/>
+        </wsdl:port>
+    </wsdl:service>
+
+
+
+</wsdl:definitions>
